@@ -9,11 +9,24 @@ import java.util.ArrayList;
 
 public class StudentDAO {
 	
-	//StudentDTO 객체를 관리할 배열 생성 
+	//StudentDTO 객체를 관리할 배열 생성
+
+	/**
+	 * ArrayList 보다 List 인터페이스 이용하기.
+	 * 저번에 말한 부분인데 이런식으로 ArrayList<StudentDTO> students 로 선언해버리면 students는 AraryList 구현체에 의존하게됨.
+	 * 하지만 List<StudentDto> students 로 변경하면 List 인터페이스에 의존함. 즉, ArrayList를 LinkedList로 변경해도 문제가 생기지 않음 (인터페이스를 통한 다형성)
+	 */
 	private ArrayList<StudentDTO> students = new ArrayList<>();
 	private StudentDTO sStudent;
 	private int id = 1000;
-	
+	/**
+	 * 	해당 변수를 전역으로 사용하고 싶다면 static을 사용해야함. 또한 이를 DAO에서 관리하는게 아니라 Server에서 관리해야함
+	 * 	예를 들어, 이 상황에서 Server.class를 켜놓고, Client.class를 실행시켜서 사용자를 추가하면 id가 순차대로 1000, 1001 이렇게 될테지만,
+	 * 	이 상황에서 Client.class를 하나 더 키고 사용자를 추가하면 1002가 아니라 1000 부터 다시 시작됨.
+ 	 */
+
+
+	//
 	public StudentDAO() {
 		//default state 유지 
 	}
@@ -42,7 +55,10 @@ public class StudentDAO {
 			
 			String fileName = dis.readUTF();
 			System.out.println(fileName);
-			
+
+	/** 파일의 링크 같은 경우 계속 재사용할 것이기 때문에 private static final String FILE_PATH = /Users/mir/Documents/project2/; 과 같이 상수로 두어도 좋음.
+		또한, String.Format 찾아보기!
+	 */
 			File targetFile = new File("/Users/mir/Documents/project2/" + fileName );
 			
 			int fileSize = (int)targetFile.length();
@@ -120,14 +136,19 @@ public class StudentDAO {
 		String editContent = dis.readUTF();
 
 		for(int i=0;i<students.size();i++) {
+			/** 별도로 for iter 문 찾아서 응용할 상황 나오면 사용하기
+			 *
+			*/
 			StudentDTO stud = students.get(i);
 			if(stud.getId() == editId) {
 
 				if(editItem == 1) {
 					stud.setName(editContent);
+					/** 세터를 안쓰고 이렇게 점수를 업데이트 해야하는데, 세터를 어떻게 안쓰냐? setName 이라는 메서드 대신 updateName 메서드로 메서드 명 변경*/
 				}
 				else if(editItem == 2) {
 					int score = Integer.parseInt(editContent);
+					/** parseInt에서 예외가 발생하면 무슨 예외가 터지는지 찾아보기. 예를 들어 사용자를 등록할때 숫자가 아니라 문자열을 입력한다면?**/
 					stud.setKor(score);
 				}
 				else if(editItem == 3) {

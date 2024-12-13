@@ -177,12 +177,19 @@ public class Client {
 	public static void addStudent(DataOutputStream dos, DataInputStream dis) {
 
 		try {
+			/**
+			 * 해당 질문은 재사용 가능함. 상수로 private static final 상수로 등록해두고 재사용하기
+			 */
 			String[] answers = {"학생의 이름을 입력하시오: ", "학생의 국어점수를 입력하시오: ", 
-					"학생의 영어점수를 입력하시오: ", "학생의 수학점수를 입력하시오: "}; 
+					"학생의 영어점수를 입력하시오: ", "학생의 수학점수를 입력하시오: "};
 			
 			for(int i=0;i<4;i++) {
 				System.out.print(answers[i]);
-				
+
+				/**
+				 * 또한 이 부분도 숫자가 0인 경우 name 인 건 혼자는 알 수 있지만, 코드가 복잡해지면 0이 name, 1이 국어점수인지 인지하기 어려움
+				 * ENUM으로 변경하기. NAME, KOR, ENG 이런식으로
+				 */
 				if(i==0) {
 					String name = sc.nextLine();
 					dos.writeUTF(name);
@@ -211,7 +218,9 @@ public class Client {
 	
 	//메뉴 출력 
 	public static void printMenuNum() {
-
+		/**
+		 * Menu2 참고. Menu2 처럼 등록해두고 Menu2 객체를 사용함으로써 객체지향설계 가능
+		 */
 		System.out.println("<< 학생 관리 시스템 >>");
 		System.out.println("1. 신규 학생 정보 등록 ");
 		System.out.println("2. 학생 목록 출력 "); 
