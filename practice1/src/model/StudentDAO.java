@@ -198,6 +198,25 @@ public class StudentDAO {
 
 		try {
 			if(students.isEmpty()) dos.writeBoolean(false);
+			else {
+				dos.writeBoolean(true);
+				dos.writeInt(students.size());
+
+				/**
+				 * dos.flush를 이용해 네트워크로 전송(소켓통신->파일입출력 작업)은 시간이 오래걸림. 메인메모리x 디스크 작업은 시간이 오래걸림 -> 최대한 자제(성능 관점)
+				 */
+				for (StudentDTO student : students) {
+					dos.writeInt(student.getId());
+					dos.writeUTF(student.getName());
+					dos.writeInt(student.getKor());
+					dos.writeInt(student.getEng());
+					dos.writeInt(student.getMath());
+					dos.writeInt(student.getSum());
+					dos.writeDouble(student.getAvg());
+				}
+			}
+			dos.flush();
+			/*
 			else dos.writeBoolean(true);
 			dos.flush();
 
@@ -225,9 +244,8 @@ public class StudentDAO {
 				dos.flush();
 
 				dos.writeDouble(student.getAvg());
-				dos.flush();
 			}
-
+			*/
 		}catch(Exception e) {
 			System.err.println("print err");
 		}
