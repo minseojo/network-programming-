@@ -15,8 +15,9 @@ public class Server {
 
 
 	public static void main(String[] args) {
-
+		
 		try {
+			//서버오픈, 클라이언트의 접속 확인 
 			ServerSocket server = new ServerSocket(20000);
 
 			System.out.println("#접속자를 기다리는 중입니다..");
@@ -27,9 +28,10 @@ public class Server {
 			DataInputStream dis = new DataInputStream(client.getInputStream());
 			DataOutputStream dos = new DataOutputStream(client.getOutputStream());
 
+			//학생 정보를 관리하기 위한 인스턴스 호출 
 			StudentDAO studentDao = new StudentDAO(); 
-//			ArrayList<StudentDTO> students = new ArrayList<>();
 
+			//클라이언트에서 요청받아 해당 기능 조건문으로 실행하는 로직 
 			while(true) {
 				int menuNum = dis.readInt();
 
@@ -63,9 +65,7 @@ public class Server {
 
 				}
 				else if(menuNum==6) {
-//					 studentDao.getStudentInfo(dis, dos);
 					 studentDao.uploadFile(dis, dos);
-
 				}
 				else {
 					dos.writeUTF("잘못 입력하셨습니다. ");
@@ -82,15 +82,6 @@ public class Server {
 	}
 	
 	
-	
-	
-	
-
-
-	
-
-	
-
 
 	
 

@@ -9,14 +9,19 @@ import java.util.ArrayList;
 
 public class StudentDAO {
 	
+	//StudentDTO 객체를 관리할 배열 생성 
 	private ArrayList<StudentDTO> students = new ArrayList<>();
 	private StudentDTO sStudent;
 	private int id = 1000;
 	
 	public StudentDAO() {
-		
+		//default state 유지 
 	}
 	
+	//파일입출력 코드 
+	//클라이언트한테 요청받은 파일을 (클라이언트 로컬 파일) 서버에 전송 
+	//서버의 파일저장 경로는 임의로 "/Users/mir/Documents/project2/"로 설정 
+	//byte배열에 담긴 내용 전달받은 후, 서버 물리저장소에 저장 
 	public void uploadFile(DataInputStream dis, DataOutputStream dos) throws IOException {
 
 		
@@ -55,7 +60,6 @@ public class StudentDAO {
 
 			fileDis.close();
 			dos.close();
-//			client.close();
 			
 
 		}catch(Exception e) {
@@ -64,7 +68,7 @@ public class StudentDAO {
 
 	}
 
-
+	//검색할 학생의 ID를 받아 해당 요소 전부 반환 
 	public void searchStudent(DataInputStream dis, DataOutputStream dos) throws IOException {
 
 		int searchId = dis.readInt();
@@ -107,6 +111,7 @@ public class StudentDAO {
 	}
 	
 	
+	//클라이언트가 수정하고 싶은 학생의 ID와 요소를 전달받아 set적용 
 	public void editStudent( DataInputStream dis, DataOutputStream dos) throws IOException {
 
 		int editId = dis.readInt();
@@ -146,6 +151,8 @@ public class StudentDAO {
 		
 	}
 	
+	
+	//클라이언트로부터 삭제할 학생의 ID를 전달받아 해당 학생 삭제 
 	public void deleteStudent(DataInputStream dis, DataOutputStream dos) throws IOException {
 
 		int deleteId = dis.readInt();
@@ -164,7 +171,8 @@ public class StudentDAO {
 		
 	}
 
-	
+
+	//학생의 정보를 클라이언트에게 전달 
 	public void getStudentInfo(DataInputStream dis, DataOutputStream dos) {
 
 		try {
@@ -206,6 +214,8 @@ public class StudentDAO {
 	}
 	
 	
+	//클라이언트가 입력한 학생의 정보를 받아 생성자 매개변수로 전달
+	//DAO 배열에 추가하여 학생 DB관리 
 	public void addStudent(DataInputStream dis, DataOutputStream dos) throws IOException {
 
 		try {

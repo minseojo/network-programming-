@@ -14,7 +14,8 @@ public class Client {
 
 	static Scanner sc = new Scanner(System.in);
 	
-	
+	//로컬경로에서 가지고 있는 파일을 출력
+	//해당 파일의 이름을 입력받아 서버로 전송하는 함수 
 	public static void uploadFile(DataOutputStream dos, DataInputStream dis) {
 
 		try {
@@ -60,6 +61,7 @@ public class Client {
 	}
 	
 	
+	//검색할 학생의 아이디를 입력받아 찾아주는 함수 
 	public static void searchStudent(DataOutputStream dos, DataInputStream dis) {
 
 		System.out.println("검색할 ID를 입력해주세요:");
@@ -80,7 +82,9 @@ public class Client {
 	}
 	
 	
-	
+	//검색할 학생의 아이디를 입력받고 서버로 전달 
+	//수정할 목록을 출력 후, 해당 요소 입력받음 
+	//수정할 항목을 서버로 전달 
 	public static void editStudent(DataOutputStream dos, DataInputStream dis) {
 
 		System.out.println("수정할 ID를 입력해주세요:");
@@ -116,6 +120,7 @@ public class Client {
 	}
 	
 	
+	//삭제할 학생의 아이디를 입력받아 서버로 전달하는 함수 
 	public static void deleteStudent(DataOutputStream dos, DataInputStream dis) {
 
 		System.out.println("삭제할 ID를 입력해주세요:");
@@ -135,7 +140,7 @@ public class Client {
 	}
 
 	
-	
+	//현재 학생의 목록을 서버에 요청하고 전달받아 출력하는 함수 
 	public static void printStudent(DataOutputStream dos, DataInputStream dis) {
 
 		try {
@@ -168,7 +173,7 @@ public class Client {
 	}
 
 	
-	
+	//새로 등록할 학생의 정보를 입력받아 서버로 전달하는 함수 
 	public static void addStudent(DataOutputStream dos, DataInputStream dis) {
 
 		try {
@@ -204,6 +209,7 @@ public class Client {
 	}
 	
 	
+	//메뉴 출력 
 	public static void printMenuNum() {
 
 		System.out.println("<< 학생 관리 시스템 >>");
@@ -219,7 +225,8 @@ public class Client {
 	}
 
 	
-
+	//메인 실행
+	//메뉴 출력 및 조건문으로 전체 로직 형성 
 	public static void main(String[] args) {
 
 		try {
